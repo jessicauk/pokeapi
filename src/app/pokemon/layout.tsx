@@ -8,8 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={[inter.className, ""].join(" ")}>
-      Pokemon Detail
+    <div className={[inter.className, "bg-slate-800"].join(" ")}>
       {children}
     </div>
   );

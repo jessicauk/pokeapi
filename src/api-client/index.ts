@@ -18,9 +18,9 @@ export async function getPokemons({ offset }: Params) {
   }
 }
 
-export async function getPokemonDetail(id:number) {
+export async function getPokemonDetail(name:string) {
     try {
-      const response = await fetch(`${url}/${id}`);
+      const response = await fetch(`${url}/${name}`);
       if (!response.ok) {
         throw new Error("Request not working");
       }
