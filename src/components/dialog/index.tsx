@@ -6,8 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
 import Image from "next/image";
 
 interface DialogResponsiveProps {
@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -30,7 +30,7 @@ export default function DialogResponsive({
   name,
   image,
   open,
-  setOpen
+  setOpen,
 }: DialogResponsiveProps) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -49,11 +49,9 @@ export default function DialogResponsive({
       keepMounted
       aria-labelledby="responsive-dialog-title"
     >
-      <DialogTitle id="responsive-dialog-title">
-        {name}
-      </DialogTitle>
+      <DialogTitle id="responsive-dialog-title">{name}</DialogTitle>
       <DialogContent>
-        <Image src={image} alt={name} fill style={{ objectFit: "fill"}}/>
+        <Image src={image} alt={name} width={200} height={200} />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} autoFocus>
