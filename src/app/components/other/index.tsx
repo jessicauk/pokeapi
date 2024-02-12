@@ -2,7 +2,7 @@ import { Chip } from "@mui/material";
 import { Specie, PokemonDetail, Item } from "@/interfaces";
 
 interface OtherProps {
-  species: Specie;
+  species: Specie | null;
   pokemon: Partial<PokemonDetail>;
 }
 export default function Other({ species, pokemon }: OtherProps) {

@@ -2,7 +2,7 @@ import Chart from "../../../components/chart";
 import { Specie } from "../../../interfaces";
 
 interface ChartProps {
-  species: Specie;
+  species: Specie | null;
 }
 export default function ChartPokemon({ species }: ChartProps) {
   return (

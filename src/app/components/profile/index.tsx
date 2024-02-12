@@ -8,7 +8,7 @@ interface ProfileProps {
   id: string | number;
   name: string;
   pokemon: Partial<PokemonDetail>;
-  species: Specie;
+  species: Specie | null;
 }
 export default function Profile({ id, name, pokemon, species }: ProfileProps) {
   return (

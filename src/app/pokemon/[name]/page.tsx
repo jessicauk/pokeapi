@@ -21,12 +21,7 @@ interface Params {
 
 export default function Page({ params }: Params) {
   const [pokemon, setPokemon] = useState<Partial<PokemonDetail>>({});
-  const [species, setSpecies] = useState<Specie>({
-    name: "",
-    shape: { name: "", url: "" },
-    color: { name: "", url: "" },
-    habitat: { name: "", url: "" },
-  });
+  const [species, setSpecies] = useState<Specie | null>(null);
   const [abilities, setAbilities] = useState<Ability[]>([]);
   const [moves, setMoves] = useState<Move[]>([]);
 

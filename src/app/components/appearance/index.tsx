@@ -1,7 +1,7 @@
 import { Specie, PokemonDetail } from "@/interfaces";
 
 export interface AppearanceProps {
-  species: Specie;
+  species: Specie | null;
   pokemon: Partial<PokemonDetail>;
 }
 
