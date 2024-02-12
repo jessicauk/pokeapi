@@ -5,7 +5,6 @@ import { Pokemon } from "@/interfaces";
 import { IMAGE_URL } from "@/const";
 import PokemonCard from "@/components/card";
 import Pagination from "@/components/pagination";
-import Loader from "@/components/loader";
 import "./globals.css";
 
 /* 
