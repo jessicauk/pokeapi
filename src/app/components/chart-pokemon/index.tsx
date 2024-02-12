@@ -10,8 +10,8 @@ export default function ChartPokemon({ species }: ChartProps) {
       <h2 className="text-xl bold text-white mb-2">Capture & Happiness</h2>
       <div className="overflow-auto">
         <Chart
-          capture={species?.capture_rate}
-          happiness={species?.base_happiness}
+          capture={species?.capture_rate ?? 0}
+          happiness={species?.base_happiness ?? 0}
         />
       </div>
     </div>
