@@ -139,12 +139,24 @@ export default function Page({ params }: Params) {
             {moves?.map((move) => (
               <tr key={move?.name} className="text-slate-600">
                 <td className="p-2 border border-white-600">{move?.name}</td>
-                <td className="p-2 border border-white-600">{move?.type?.name}</td>
-                <td className="p-2 border border-white-600">{move?.power ?? "-"}</td>
-                <td className="p-2 border border-white-600">{move?.pp ?? "-"}</td>
-                <td className="p-2 border border-white-600">{move?.accuracy ?? "0"}%</td>
-                <td className="p-2 border border-white-600">{move?.damage_class.name ?? "-"}</td>
-                <td className="p-2 border border-white-600">{move?.meta?.category?.name ?? "-"}</td>
+                <td className="p-2 border border-white-600">
+                  {move?.type?.name}
+                </td>
+                <td className="p-2 border border-white-600">
+                  {move?.power ?? "-"}
+                </td>
+                <td className="p-2 border border-white-600">
+                  {move?.pp ?? "-"}
+                </td>
+                <td className="p-2 border border-white-600">
+                  {move?.accuracy ?? "0"}%
+                </td>
+                <td className="p-2 border border-white-600">
+                  {move?.damage_class.name ?? "-"}
+                </td>
+                <td className="p-2 border border-white-600">
+                  {move?.meta?.category?.name ?? "-"}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -153,11 +165,17 @@ export default function Page({ params }: Params) {
       <div className="flex flex-col gap-3 p-2 col-span-3 row-span-5 sm:col-span-1 sm:row-span-3 shadow-md bg-blue-300 rounded-md overscroll-contain overflow-auto scroll-smooth">
         <h2 className="text-xl bold text-white mb-2">Abilities</h2>
         {abilities?.map((ability: Ability) => (
-          <Chip key={ability?.name} label={ability?.name} classes={{ root: "bg-yellow-400 text-slate-600 text-bold"}}/>
+          <Chip
+            key={ability?.name}
+            label={ability?.name}
+            classes={{ root: "bg-yellow-400 text-slate-600 text-bold" }}
+          />
         ))}
       </div>
       <div className="p-2 col-span-6 row-span-6 sm:col-span-1 sm:row-span-5 shadow-md bg-blue-300 rounded-md">
-        <h2 className="text-xl bold text-white mb-2">Catch, training and breeding</h2>
+        <h2 className="text-xl bold text-white mb-2">
+          Catch, training and breeding
+        </h2>
         <Chart />
       </div>
       <div className="p-2 col-span-6 row-span-6 sm:col-span-3 sm:row-span-3 shadow-md bg-blue-300 rounded-md">
