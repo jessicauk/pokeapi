@@ -7,9 +7,17 @@ import PokemonCard from "@/components/card";
 import Pagination from "@/components/pagination";
 import "./globals.css";
 
+/* 
+  Requiremens:
+  Maximum of 20 pokemons per page
+  Limit the number of pokemons to 151
+  On name double click, navigate to the pokemon detail page
+  On image click, open a dialog with the pokemon image
+*/
+
 export default function Home() {
   const limit = 20;
-  const totalPokemons = 31;
+  const totalPokemons = 151;
   const totalPages = Math.ceil(totalPokemons / limit);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
