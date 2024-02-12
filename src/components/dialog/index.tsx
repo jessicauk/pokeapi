@@ -41,6 +41,7 @@ export default function DialogResponsive({
 
   return (
     <Dialog
+      className=""
       fullScreen={fullScreen}
       maxWidth="md"
       open={open}
@@ -48,13 +49,14 @@ export default function DialogResponsive({
       onClose={handleClose}
       keepMounted
       aria-labelledby="responsive-dialog-title"
+      classes={{ paper: "bg-slate-800 text-white text-4xl" }}
     >
-      <DialogTitle id="responsive-dialog-title">{name}</DialogTitle>
-      <DialogContent>
+      <DialogTitle id="responsive-dialog-title" className="capitalize">{name}</DialogTitle>
+      <DialogContent className="flex flex-col justify-center items-center">
         <Image src={image} alt={name} width={200} height={200} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={handleClose} autoFocus className="bg-red-600	text-white shadow-lg shadow-red-600/30 p-1.5 font-bold hover:bg-red-800">
           Close
         </Button>
       </DialogActions>
