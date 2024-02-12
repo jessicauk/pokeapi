@@ -61,7 +61,7 @@ export default function Home() {
 
   return (
     <div className="h-screen p-5 grid grid-rows-12">
-      <div className="grid row-span-11 gap-8 order-2 sm:order-1 sm:grid-cols-5">
+      <div className="h-6/6 overflow-auto grid row-span-11 gap-8 order-2 sm:order-1 sm:grid-cols-5">
         {pokemons?.map((pokemon: Pokemon) => (
           <PokemonCard {...pokemon} key={pokemon.name} />
         ))}

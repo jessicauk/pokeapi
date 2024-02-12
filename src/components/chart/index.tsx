@@ -9,14 +9,15 @@ interface ChartProps {
   happiness: number;
 }
 
-const sizing = {
-  margin: { right: 5 },
-  width: 200,
-  height: 200,
-  legend: { hidden: true },
-};
-
 export default function Chart({ capture, happiness }: ChartProps) {
+  
+  const sizing = {
+    margin: { right: 5 },
+    width: 200,
+    height: 200,
+    legend: { hidden: true },
+  };
+  
   const dataset = React.useMemo(() => {
     return [
       { label: "hapiness", value: happiness ?? 0, color: "#0088FE" },
