@@ -1,13 +1,13 @@
-const url = new URL("https://pokeapi.co/api/v2/pokemon"); // https://pokeapi.co/
-const LIMIT = 20
+const API_URL = new URL("https://pokeapi.co/api/v2/pokemon"); // https://pokeapi.co/
 
 export interface Params {
-    offset: number
+  offset: number;
+  limit?: number;
 }
 
-export async function getPokemons({ offset }: Params) {
+export async function getPokemons({ offset, limit }: Params) {
   try {
-    const response = await fetch(`${url}?offset=${offset}&limit=${LIMIT}`);
+    const response = await fetch(`${API_URL}?offset=${offset}&limit=${limit}`);
     if (!response.ok) {
       throw new Error("Request not working");
     }
@@ -18,16 +18,28 @@ export async function getPokemons({ offset }: Params) {
   }
 }
 
-export async function getPokemonDetail(name:string) {
-    try {
-      const response = await fetch(`${url}/${name}`);
-      if (!response.ok) {
-        throw new Error("Request not working");
-      }
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.log(error);
+export async function getPokemonDetail(name: string) {
+  try {
+    const response = await fetch(`${API_URL}/${name}`);
+    if (!response.ok) {
+      throw new Error("Request not working");
     }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
+}
 
+export async function getData(url: string) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Request not working");
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { getPokemons } from "@/api-client";
 import { Pokemon } from "@/interfaces";
 import { IMAGE_URL } from "@/const";
@@ -9,59 +8,62 @@ import Pagination from "@/components/pagination";
 import "./globals.css";
 
 export default function Home() {
-  const router = useRouter();
   const limit = 20;
-  const totalPokemons = 151;
+  const totalPokemons = 31;
   const totalPages = Math.ceil(totalPokemons / limit);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
+  const [finalLimit, setFinalLimit] = useState(limit);
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
     async function getPokemonList() {
-      const data = await getPokemons({ offset });
+      const data = await getPokemons({ offset, limit: finalLimit });
+      
       setPokemons(
-        data.results.map((pokemon: Pokemon) => ({
+        data.results.map((pokemon: Pokemon) => {
+          return ({
           name: pokemon.name,
           image: `${IMAGE_URL}${pokemon.url.split("/")[6]}.png`,
-        }))
+        })})
       );
     }
     getPokemonList();
-  }, [offset]);
+  }, [finalLimit, offset]);
 
   const previous = () => {
-    if (offset - limit >= 0) {
-      setOffset(offset - limit);
-      setPage((prevState) => prevState - 1);
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+      const newOffset = offset - limit;
+      setOffset(newOffset);
+      setFinalLimit(limit);
     }
   };
 
-  const next = () => {
-    if (offset + limit < totalPokemons) {
-      setOffset(offset + limit);
-      setPage((prevState) => prevState + 1);
+  const next = useCallback(() => {
+    if (page < totalPages) {
+      const newOffset = offset + limit;
+      setOffset(newOffset);
+      setPage((prevPage) => prevPage + 1);
+      if (page === totalPages - 1) {
+        setFinalLimit(totalPokemons % limit || limit);
+      }
     }
-    /* const max = 151;
-    const limit = 20;
-    const pages = Math.ceil(max / limit);
-    const total = max - pages * 20;
-    console.log(page, "pages");
-    setPage((prevState) => prevState + 1);
-    if (page > 7) {
-      return setOffset((prevState) => prevState + total);
-    }
-    setOffset((prevState) => prevState + 20); */
-  };
+  }, [page, totalPages, limit, totalPokemons, offset]);
 
   return (
-    <div className="p-8 h-screen flex flex-col">
-      <div className="grid row-span-2 gap-4 sm:order-2 sm:grid-cols-4">
+    <div className="h-screen p-5 grid grid-rows-12">
+      <div className="grid row-span-11 gap-8 order-2 sm:order-1 sm:grid-cols-5">
         {pokemons?.map((pokemon: Pokemon) => (
-          <PokemonCard {...pokemon} key={pokemon.name}/>
+          <PokemonCard {...pokemon} key={pokemon.name} />
         ))}
       </div>
-      <Pagination previous={previous} page={page} total={totalPages} next={next} />
+      <Pagination
+        previous={previous}
+        page={page}
+        total={totalPages}
+        next={next}
+      />
     </div>
   );
 }

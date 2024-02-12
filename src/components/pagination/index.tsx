@@ -12,7 +12,7 @@ export default function Pagination({
   total,
 }: PaginationProps) {
   return (
-    <div className="flex justify-end gap-6 mt-4 items-center sm:order-2">
+    <div className="row-span-1 flex justify-between sm:justify-end gap-6 items-center order-1 sm:order-2">
       <button className="bg-red-600	text-white p-3" onClick={previous}>
         Previous
       </button>
