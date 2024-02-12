@@ -19,11 +19,13 @@ export default function Home() {
   useEffect(() => {
     async function getPokemonList() {
       const data = await getPokemons({ offset, limit: finalLimit });
+      
       setPokemons(
-        data.results.map((pokemon: Pokemon) => ({
+        data.results.map((pokemon: Pokemon) => {
+          return ({
           name: pokemon.name,
           image: `${IMAGE_URL}${pokemon.url.split("/")[6]}.png`,
-        }))
+        })})
       );
     }
     getPokemonList();
@@ -50,8 +52,8 @@ export default function Home() {
   }, [page, totalPages, limit, totalPokemons, offset]);
 
   return (
-    <div className="p-8 h-screen flex flex-col">
-      <div className="grid row-span-2 gap-4 sm:order-2 sm:grid-cols-4">
+    <div className="h-screen p-5 grid grid-rows-12">
+      <div className="grid row-span-11 gap-8 order-2 sm:order-1 sm:grid-cols-5">
         {pokemons?.map((pokemon: Pokemon) => (
           <PokemonCard {...pokemon} key={pokemon.name} />
         ))}
