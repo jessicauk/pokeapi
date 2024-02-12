@@ -5,6 +5,9 @@ export interface AppearanceProps {
   pokemon: Partial<PokemonDetail>;
 }
 
+const convertion = (value: number) => {
+  return value / 10;
+};
 export default function Appearance({ species, pokemon }: AppearanceProps) {
   return (
     <div className="shadow-md bg-blue-300 rounded-md col-span-3 row-span-2 sm:row-auto sm:col-span-1 p-2">
@@ -12,11 +15,11 @@ export default function Appearance({ species, pokemon }: AppearanceProps) {
       <div className="flex flex-col">
         <p className="text-slate-600">
           <span className="text-md bold text-white">Weight: </span>
-          {pokemon?.weight}
+          {`${convertion(pokemon?.weight ?? 0)} kg`}
         </p>
         <p className="text-slate-600">
           <span className="text-md bold text-white">Height: </span>
-          {pokemon?.height}
+          {`${convertion(pokemon?.height ?? 0)} m`}
         </p>
         <p className="text-slate-600">
           <span className="text-md bold text-white">Color: </span>

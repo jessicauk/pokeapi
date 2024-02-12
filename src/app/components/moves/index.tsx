@@ -5,7 +5,7 @@ interface MoveProps {
 }
 export default function Moves({ moves }: MoveProps) {
   return (
-    <div className="shadow-md bg-blue-300 rounded-md col-span-6 row-span-2 sm:row-auto sm:col-span-4 p-2">
+    <div className="shadow-md bg-blue-300 rounded-md col-span-6 row-span-2 hidden sm:flex sm:row-auto sm:col-span-4 p-2">
       <h2 className="text-xl bold text-white mb-2">Moves</h2>
       <div className="overflow-auto w-full h-20 sm:h-60">
         <table className=" table-auto border-collapse border border-slate-500">

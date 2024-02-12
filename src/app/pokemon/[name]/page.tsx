@@ -61,14 +61,19 @@ export default function Page({ params }: Params) {
   }, [params.name]);
 
   return (
-    <div className="p-5 h-screen grid grid-flow-row-dense grid-cols-6 gap-6 place-content-center">
+    <div className="p-5 h-screen min-h-screen grid grid-flow-row-dense grid-cols-6 gap-6 place-content-center">
       <Header name={params.name} onClick={() => router.push("/")} />
-      <Profile id={pokemon?.id ?? ""} name={params.name} pokemon={pokemon} species={species}/>
+      <Profile
+        id={pokemon?.id ?? ""}
+        name={params.name}
+        pokemon={pokemon}
+        species={species}
+      />
       <Moves moves={moves} />
       <Appearance species={species} pokemon={pokemon} />
-      <Abilities abilities={abilities}/>
-      <Other />
-      <ChartPokemon />
+      <Abilities abilities={abilities} />
+      <Other species={species} pokemon={pokemon} />
+      <ChartPokemon species={species} />
       <Stats stats={pokemon?.stats} />
     </div>
   );

@@ -1,3 +1,8 @@
+export interface Item {
+  name: string;
+  url: string;
+}
+
 export interface Pokemon {
   name: string;
   url: string;
@@ -12,16 +17,14 @@ export interface Ability {
 
 interface TextEntry {
   flavor_text: string;
-  language: { name: string; url: string };
-  version: { name: string; url: string };
+  language: Item;
+  version: Item;
 }
 
 interface Meta {
-  category: {
-    name: string;
-    url: string;
-  }
+  category: Item;
 }
+
 export interface Move {
   name: string;
   url: string;
@@ -29,24 +32,29 @@ export interface Move {
   power: number;
   pp: number;
   accuracy: number;
-  type: { name: string; url: string };
-  damage_class: { name: string; url: string };
+  type: Item;
+  damage_class: Item;
   flavor_text_entries: TextEntry[];
-  meta: Meta
+  meta: Meta;
 }
 
 export interface Specie {
   name: string;
-  shape: { name: string; url: string };
-  color: { name: string; url: string }
-  habitat: { name: string; url: string }
+  shape: Item;
+  color: Item;
+  habitat: Item;
+  base_happiness: number;
+  capture_rate: number;
+  evolves_from_species: Item;
+  growth_rate: Item;
 }
 export interface PokemonDetail extends Pokemon {
   id: number;
   abilities: Ability[];
-  moves: [{ move: { name: string; url: string } }];
-  types: [{ slot: number; type: { name: string; url: string } }];
+  moves: [{ move: Item }];
+  types: [{ slot: number; type: Item }];
   weight: number;
   height: number;
-  stats: [{ base_stat: number; effort: number, stat: { name: string; url: string } }];
+  held_items: { item: Item }[];
+  stats: [{ base_stat: number; effort: number; stat: Item }];
 }
