@@ -20,9 +20,7 @@ interface Params {
 }
 
 export default function Page({ params }: Params) {
-  const [pokemon, setPokemon] = useState<Partial<PokemonDetail>>({
-    name: "",
-  });
+  const [pokemon, setPokemon] = useState<Partial<PokemonDetail>>({});
   const [species, setSpecies] = useState<Specie>({
     name: "",
     shape: { name: "", url: "" },
@@ -64,14 +62,14 @@ export default function Page({ params }: Params) {
 
   return (
     <div className="p-5 h-screen grid grid-flow-row-dense grid-cols-6 gap-6 place-content-center">
-      <Header name={params.name} onClick={() => router.push("/pokemon")} />
+      <Header name={params.name} onClick={() => router.push("/")} />
       <Profile id={pokemon?.id ?? ""} name={params.name} pokemon={pokemon} species={species}/>
       <Moves moves={moves} />
       <Appearance species={species} pokemon={pokemon} />
       <Abilities abilities={abilities}/>
       <Other />
       <ChartPokemon />
-      <Stats />
+      <Stats stats={pokemon?.stats} />
     </div>
   );
 }
