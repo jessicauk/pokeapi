@@ -2,6 +2,8 @@ import Loader from "../components/loader";
 
 export default function Loading() {
   return (
-    <Loader />
+    <div className="row-span-6 col-span-6">
+      <Loader />
+    </div>
   );
 }

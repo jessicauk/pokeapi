@@ -1,10 +1,11 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, Suspense } from "react";
 import { getPokemons } from "@/api-client";
 import { Pokemon } from "@/interfaces";
 import { IMAGE_URL } from "@/const";
 import PokemonCard from "@/components/card";
 import Pagination from "@/components/pagination";
+import Loader from "@/components/loader";
 import "./globals.css";
 
 /* 
@@ -61,6 +62,9 @@ export default function Home() {
 
   return (
     <div className="h-screen p-5 grid grid-rows-12">
+      <div className="row-end-auto">
+        <Loader />
+      </div>
       <div className="grid row-span-11 gap-8 order-2 sm:order-1 sm:grid-cols-5">
         {pokemons?.map((pokemon: Pokemon) => (
           <PokemonCard {...pokemon} key={pokemon.name} />
