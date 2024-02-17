@@ -1,27 +1,44 @@
-import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { expect, describe, it, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, within, cleanup } from "@testing-library/react";
 import Pagination from ".";
 
-const previous = jest.fn();
-const next = jest.fn();
+// creating mock functions
+const previous = vi.fn();
+const next = vi.fn();
 
 describe("Pagination", () => {
-  it("should render the pagination", () => {
+  beforeEach(() => {
+    previous.mockClear();
+    next.mockClear();
     render(<Pagination previous={previous} page={1} total={10} next={next} />);
-    const previousButton = screen.getByText("Previous");
-    const nextButton = screen.getByText("Next");
-    expect(previousButton).toBeInTheDocument();
-    expect(nextButton).toBeInTheDocument();
   });
-  it("should call the previous function", () => {
-    render(<Pagination previous={previous} page={1} total={10} next={next} />);
-    const previousButton = screen.getByText("Previous");
+
+  afterEach(() => {
+    previous.mockClear();
+    next.mockClear();
+    cleanup();
+  });
+
+  it("should render the pagination", () => {
+    const pagination = screen.getByRole("region", { name: /pagination/i });
+    // within(pagination).debug();
+
+    const previousButton = within(pagination).getByTestId("previous-button");
+    const nextButton = within(pagination).getByTestId("next-button");
+    expect(previousButton).toBeDefined();
+    expect(nextButton).toBeDefined();
+  });
+
+  it("should call the previous function when previous button is clicked", () => {
+    const pagination = screen.getByRole("region", { name: /pagination/i });
+    const previousButton = within(pagination).getByTestId("previous-button");
     previousButton.click();
     expect(previous).toHaveBeenCalled();
   });
-  it("should call the next function", () => {
-    render(<Pagination previous={previous} page={1} total={10} next={next} />);
-    const nextButton = screen.getByText("Next");
+
+  it("should call the next function when next button is clicked", () => {
+    const pagination = screen.getByRole("region", { name: /pagination/i });
+    const nextButton = within(pagination).getByTestId("next-button");
     nextButton.click();
     expect(next).toHaveBeenCalled();
   });
