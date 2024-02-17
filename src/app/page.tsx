@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState, Suspense } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { getPokemons } from "@/api-client";
 import { Pokemon } from "@/interfaces";
 import { IMAGE_URL } from "@/const";
@@ -24,29 +24,41 @@ export default function Home() {
   const [finalLimit, setFinalLimit] = useState(limit);
   const [pokemons, setPokemons] = useState([]);
 
+  const hasFetched = useRef(false);
+
   useEffect(() => {
+    if (hasFetched.current) return; // Prevents running the effect more than once
+    hasFetched.current = true; // Mark as fetched
+
     async function getPokemonList() {
       const data = await getPokemons({ offset, limit: finalLimit });
-      
+
       setPokemons(
         data.results.map((pokemon: Pokemon) => {
-          return ({
-          name: pokemon.name,
-          image: `${IMAGE_URL}${pokemon.url.split("/")[6]}.png`,
-        })})
+          return {
+            name: pokemon.name,
+            image: `${IMAGE_URL}${pokemon.url.split("/")[6]}.png`,
+          };
+        })
       );
+      hasFetched.current = false;
     }
     getPokemonList();
   }, [finalLimit, offset]);
 
-  const previous = () => {
+  const previous = useCallback(() => {
     if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
       const newOffset = offset - limit;
       setOffset(newOffset);
-      setFinalLimit(limit);
+      setPage((previous) => previous - 1);
+
+      if (page === totalPages + 1) {
+        setFinalLimit(totalPokemons % limit || limit);
+      } else {
+        setFinalLimit(limit);
+      }
     }
-  };
+  }, [page, totalPages, limit, totalPokemons, offset]);
 
   const next = useCallback(() => {
     if (page < totalPages) {

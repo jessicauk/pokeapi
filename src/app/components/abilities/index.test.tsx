@@ -1,4 +1,5 @@
-import "@testing-library/jest-dom";
+import { expect, describe, it } from "vitest";
+
 import { render, screen } from "@testing-library/react";
 import Abilities from ".";
 
@@ -22,7 +23,7 @@ describe("Abilities", () => {
     );
     const ability1 = screen.getByText("ability 1");
     const ability2 = screen.getByText("ability 2");
-    expect(ability1).toBeInTheDocument();
-    expect(ability2).toBeInTheDocument();
+    expect(ability1).toBeDefined();
+    expect(ability2).toBeDefined();
   });
 });

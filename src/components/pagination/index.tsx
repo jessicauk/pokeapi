@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 interface PaginationProps {
   previous: () => void;
   next: () => void;
@@ -5,15 +7,15 @@ interface PaginationProps {
   total: number;
 }
 
-export default function Pagination({
-  previous,
-  next,
-  page,
-  total,
-}: PaginationProps) {
+function Pagination({ previous, next, page, total }: PaginationProps) {
   return (
-    <div className="row-span-1 flex justify-between sm:justify-end gap-6 items-center order-1 sm:order-2">
+    <div
+      role="region"
+      aria-label="pagination"
+      className="row-span-1 flex justify-between sm:justify-end gap-6 items-center order-1 sm:order-2"
+    >
       <button
+        data-testid="previous-button"
         className="bg-red-600	shadow-lg shadow-red-600/30 text-white p-1.5 font-bold hover:bg-red-800"
         onClick={previous}
       >
@@ -24,6 +26,7 @@ export default function Pagination({
         <span className="text-xl">{total}</span>
       </h1>
       <button
+        data-testid="next-button"
         className="bg-red-600	text-white shadow-lg shadow-red-600/30 p-1.5 font-bold hover:bg-red-800"
         onClick={next}
       >
@@ -32,3 +35,5 @@ export default function Pagination({
     </div>
   );
 }
+
+export default memo(Pagination);
