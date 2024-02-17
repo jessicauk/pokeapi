@@ -1,6 +1,6 @@
 import { useState, MouseEventHandler } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Pokemon } from "@/interfaces";
 import DialogResponsive from "../dialog";
 
@@ -16,8 +16,15 @@ export default function PokemonCard(pokemon: Pokemon) {
     setOpen(true);
   };
   return (
-    <div className="group rounded-xl h-fit shadow-xl bg-blue-900 flex flex-col justify-center content-center items-center hover:bg-amber-300 cursor-pointer">
-      <h1 className="mt-2.5 text-white cursor-pointer capitalize text-lg group-hover:text-blue-900" onClick={handleClick}>
+    <div
+      role="listitem"
+      aria-label={pokemon.name}
+      className="group rounded-xl h-fit shadow-xl bg-blue-900 flex flex-col justify-center content-center items-center hover:bg-amber-300 cursor-pointer"
+    >
+      <h1
+        className="mt-2.5 text-white cursor-pointer capitalize text-lg group-hover:text-blue-900"
+        onClick={handleClick}
+      >
         {pokemon.name}
       </h1>
       <Image
